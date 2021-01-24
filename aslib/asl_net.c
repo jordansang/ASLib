@@ -106,7 +106,8 @@ result_t asl_net_set_nonblocking(struct asl_socket *sock, s_int32_t state)
 {
     if(sock != NULL)
     {
-        return ioctl(sock->s, FIONBIO, (int)&state);
+        // return ioctl(sock->s, FIONBIO, (int)&state);
+        return ioctl(sock->s, FIONBIO, &state);
     }
     return FAILURE;
 }

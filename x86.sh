@@ -2,7 +2,7 @@
 
 echo "Build ASLib 0.0.1"
 
-OUTDIR=/opt/as/ASLib
+OUTDIR=/home/jsang/workspace/as/ASLib
 
 rm -rf $OUTDIR
 mkdir $OUTDIR
@@ -11,12 +11,12 @@ make clean
 
 make distclean
 
-../../mnt/hgfs/WorkSpace/as/configure --prefix=$OUTDIR --enable-xml2=/usr/local --disable-allwarning
+./configure --prefix=$OUTDIR --disable-allwarning
 
 make
 
 make install
 
-cp -r ASLib /mnt/hgfs/WorkSpace/
+# cp -r ASLib /mnt/hgfs/WorkSpace/
 
 echo "Build Finish"

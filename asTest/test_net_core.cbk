@@ -1,0 +1,56 @@
+#include "asl_inc.h"
+#include "asf_telnet.h"
+#define TEST_TELNET_DEFAULT_HELP "Test Telnet Help String"
+
+static u_int32_t test_telnet_opfunc(struct asf_telnet *at)
+{
+    asl_print_dbg("Get telnet input:%s", at->in);
+    u_int32_t size = random()%1024 + 2;
+    char* buf = (char*)asl_malloc(size);
+    asl_memset(buf, 'a', size - 1);
+    //buf[0] = '\r';
+    //buf[1] = '\n';
+    *(at->out) = buf;
+    return size;
+}
+
+
+static u_int32_t test_telnet_hfunc(struct asf_telnet *at)
+{
+    asl_print_dbg("Get telnet input(%d):%s", at->inSize, at->in);
+    u_int32_t size = asl_strtlen(TEST_TELNET_DEFAULT_HELP);
+    u_int8_t* buf = (u_int8_t*)asl_malloc(size);
+    asl_memcpy(buf, TEST_TELNET_DEFAULT_HELP, size);
+    *(at->out) = buf;
+    return size;
+}
+
+static u_int32_t test_telnet_func(struct asf_telnet *at)
+{
+    return 0;
+}
+
+void test_telnet()
+{
+    struct asl_net_info info;
+    info.ip = 0x7f000001;
+    info.port = 10001;
+    struct asf_telnet *at = asf_telnet_create(&info, test_telnet_func, test_telnet_func, test_telnet_func, "Test Telnet");
+    //struct asf_telnet *at = asf_telnet_create(&info, test_telnet_opfunc, test_telnet_hfunc, "Test Telnet");
+
+    //while(TRUE)
+    //    sleep(1000);
+    asl_telnet_set_timeout(at, 5);
+    sleep(10);
+
+    asl_telnet_set_timeout(at, 0);
+
+    sleep(10);
+
+    asl_telnet_set_timeout(at, 5);
+
+    sleep(100);
+    asf_telnet_destroy(&at);
+
+    sleep(10);
+}

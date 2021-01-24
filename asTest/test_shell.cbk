@@ -1,0 +1,70 @@
+#include "asl_inc.h"
+#include "asf_shell.h"
+static u_int32_t test_sh_func(struct asl_sh *as)
+{
+    return 0;
+}
+
+void test_ttyset(int Reset)
+{
+    static struct termio old;
+    struct termio        arg;
+
+    if (Reset == 0) 
+    {
+        (void)ioctl(0, TCGETA, &old);
+
+        arg = old;
+        arg.c_lflag &= ~(ECHO | ICANON);
+        arg.c_iflag &= ~(ISTRIP | INPCK);
+        arg.c_cc[VMIN] = 1;
+        arg.c_cc[VTIME] = 0;
+        (void)ioctl(0, TCSETAW, &arg);
+    } 
+    else 
+    {
+        (void)ioctl(0, TCSETAW, &old);
+    }
+}
+
+
+void test_shell_o()
+{
+    char buf[128] = {0};
+    int ch = 0;
+    test_ttyset(0);
+    //setvbuf(stdout, NULL, _IONBF, 0);
+    //setvbuf(stdin, NULL, _IONBF, 0);
+    
+    printf("# > ");
+
+    buf[0] = getchar();
+    putchar(buf[0]);
+
+    printf("\n");
+    asl_print_hex(buf, 10, "buf");
+
+    printf("# > ");    
+
+    buf[0] = getchar();
+    putchar(buf[0]);
+
+    printf("\n");
+    asl_print_hex(buf, 10, "buf");
+
+    //setvbuf(stdin, NULL, _IOLBF, 0);
+    //setvbuf(stdout, NULL, _IOLBF, 0);
+    test_ttyset(1);
+
+    return;
+}
+
+void test_shell()
+{
+    //return test_shell_o();
+    
+    struct asl_sh *as = asl_sh_create(test_sh_func, test_sh_func, test_sh_func, "Test Shell");
+
+    sleep(20);
+    asl_sh_destroy(&as);
+}

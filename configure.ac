@@ -144,8 +144,8 @@ dnl ------------------------------------------------
 AC_ARG_ENABLE(xml2,
 [  --enable-xml2=ARG  designate libxml2 base path])
 if test "x${enable_xml2}" = "x" ; then
-IXML="$prefix/include/libxml2"
-LXML="$prefix/lib"
+IXML="/usr/include/libxml2"
+LXML="/lib/x86_64-linux-gnu"
 else
 IXML="${enable_xml2}/include/libxml2"
 LXML="${enable_xml2}/lib"

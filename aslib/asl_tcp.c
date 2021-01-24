@@ -39,9 +39,9 @@ struct asl_socket* asl_tcp_accept(struct asl_socket *sock)
     asl_memset(&addr, 0, sizeof(struct sockaddr_in));
     asl_net_set_sockaddr(&addr, &(sock->info));
     len = sizeof(struct sockaddr);
-    csock->s = accept(sock->s, (struct sockaddr*)&addr, &len);
+    csock->s = accept(sock->s, (struct sockaddr*)&addr, (socklen_t*)&len);
     csock->sockType = ASL_NET_TCP;
-    getsockname(csock->s, (struct sockaddr*)&addr, &len);
+    getsockname(csock->s, (struct sockaddr*)&addr, (socklen_t*)&len);
     asl_net_get_netInfo(&addr, &(csock->info));
     return csock;
 }

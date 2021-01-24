@@ -21,7 +21,7 @@ result_t asl_sem_create(struct asl_sem *sem, char* name, s_int32_t initCount)
         {
             len = strlen(SEM_DEFAULT_NAME) + 1;
             sem->name = (char*)asl_malloc(len);
-            strncpy(sem->name, SEM_DEFAULT_NAME, len - 1);
+            strncpy(sem->name, SEM_DEFAULT_NAME, len);
         }
         
         sem->count = initCount;

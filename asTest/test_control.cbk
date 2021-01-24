@@ -1,0 +1,77 @@
+#include "asl_inc.h"
+#include "asf_control.h"
+
+#define TEST_ECHO1_HELP_STR "one_echo str <cr>"
+#define TEST_ECHO4_HELP_STR "fore_echo str str str str <cr>"
+
+static s_int32_t one_echo(struct asf_ctrl *ac)
+{
+    if(asf_ctrl_is_help_cmd(ac) || ASF_CTRL_ARG_COUNT(ac) != 1)
+        return asf_ctrl_ret_puts(ac, TEST_ECHO1_HELP_STR);
+
+    return asf_ctrl_ret_putf(ac, "test_echo1:%s", *(ASF_CTRL_ARG(ac)));
+}
+
+static s_int32_t fore_echo(struct asf_ctrl *ac)
+{
+    if(asf_ctrl_is_help_cmd(ac) || ASF_CTRL_ARG_COUNT(ac) != 4)
+        return asf_ctrl_ret_puts(ac, TEST_ECHO4_HELP_STR);
+    char** param = ASF_CTRL_ARG(ac);
+    return asf_ctrl_ret_putf(ac, "test_echo4:%s %s %s %s", param[0],param[1],param[2],param[3]);
+}
+
+#define TEST_PRINT1_HELP_STR "test_print1 str <cr>"
+#define TEST_PRINT4_HELP_STR "test_print4 str str str str <cr>"
+
+static s_int32_t one_print(struct asf_ctrl *ac)
+{
+    if(asf_ctrl_is_help_cmd(ac) || ASF_CTRL_ARG_COUNT(ac) != 1)
+        return asf_ctrl_ret_puts(ac, TEST_ECHO1_HELP_STR);
+
+    return asf_ctrl_ret_putf(ac, "test_print1:%s", *(ASF_CTRL_ARG(ac)));
+}
+
+static s_int32_t fore_print(struct asf_ctrl *ac)
+{
+    if(asf_ctrl_is_help_cmd(ac) || ASF_CTRL_ARG_COUNT(ac) != 4)
+        return asf_ctrl_ret_puts(ac, TEST_ECHO4_HELP_STR);
+    char** param = ASF_CTRL_ARG(ac);
+    return asf_ctrl_ret_putf(ac, "test_print4:%s %s %s %s", param[0],param[1],param[2],param[3]);
+}
+
+static void loop()
+{    
+    while(TRUE)
+        sleep(1000);
+}
+
+void test_control()
+{
+    struct asf_ctrl *rac = asf_rc_create("Test Remote Control");
+    asf_rc_add_dir(rac, NULL, "echo");
+    asf_rc_add_dir(rac, NULL, "print");
+    asf_rc_add_dir(rac, "1 2 3 4 5", "6");
+    asf_rc_add_dir(rac, "pri eco", "1");
+    asf_rc_add_cmd(rac, "echo", one_echo);
+    asf_rc_add_cmd(rac, "echo", fore_echo);
+    asf_rc_add_cmd(rac, "print", one_print);
+    asf_rc_add_cmd(rac, "print", fore_print);
+
+    asf_rc_start(rac);
+
+    struct asf_ctrl *lac = asf_lc_create("Test Local Control");
+
+    asf_lc_add_dir(lac, NULL, "echo");
+    asf_lc_add_dir(lac, NULL, "print");
+    asf_lc_add_dir(lac, "1 2 3 4 5", "6");
+    asf_lc_add_dir(lac, "pri eco", "1");
+    asf_lc_add_cmd(lac, "echo", one_echo);
+    asf_lc_add_cmd(lac, "echo", fore_echo);
+    asf_lc_add_cmd(lac, "print", one_print);
+    asf_lc_add_cmd(lac, "print", fore_print);
+
+    asf_lc_start(lac);
+    
+
+    loop();
+}
