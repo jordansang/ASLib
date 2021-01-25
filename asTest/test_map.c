@@ -69,7 +69,7 @@ void test_map()
         //            *(s_int32_t*)asd_map_get_data(map, &keys[choice]));
     }
     end = asl_time_get_stamp();
-    asl_print_dbg("Find %d Items to Map consum: %llu", TEST_MAP_TEST_COUNT, end - start);
+    asl_print_dbg("Find %d Items to Map consum: %lu", TEST_MAP_TEST_COUNT, end - start);
     asd_map_destroy(map);
     return;
 }

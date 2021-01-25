@@ -197,9 +197,9 @@ static void tree_performance_test_delete_node(tree *t, u_int64_t *val)
     ret = asd_tree_del(t, val);
     if(ret < 0)
     {
-        asl_print_err("Delete Tree Node with val:%llu failed", *val);
+        asl_print_err("Delete Tree Node with val:%lu failed", *val);
     }
-    //asl_print_dbg("Delete Node %llu", *val);
+    //asl_print_dbg("Delete Node %lu", *val);
 }
 static void tree_performance_test_add_node(tree *t, u_int64_t *parent, u_int64_t *val)
 {
@@ -209,21 +209,21 @@ static void tree_performance_test_add_node(tree *t, u_int64_t *parent, u_int64_t
     {
         if(parent != NULL)
         {
-            asl_print_err("Add Tree Node with val:%llu to parent:%llu failed", *val, *parent);
+            asl_print_err("Add Tree Node with val:%lu to parent:%lu failed", *val, *parent);
         }
         else
         {
-            asl_print_err("Add Tree Root Node with val:%llu failed", *val);
+            asl_print_err("Add Tree Root Node with val:%lu failed", *val);
         }
     }
     #if 0
     if(parent != NULL)
     {
-        asl_print_dbg("Add Node %2d to Branch %llu", *val, *parent);
+        asl_print_dbg("Add Node %2d to Branch %lu", *val, *parent);
     }
     else
     {
-        asl_print_dbg("Add Root Node %llu to Tree", *val);
+        asl_print_dbg("Add Root Node %lu to Tree", *val);
     }
     #endif
 }
@@ -301,7 +301,7 @@ static int tree_performance_test(u_int32_t maxBranch, u_int32_t maxLevel, u_int3
         testIndex++;
     }
     endTime = asl_time_get_stamp();
-    asl_print_dbg("Tree Performance Test Over, total test time: %llu s",endTime - startTime);
+    asl_print_dbg("Tree Performance Test Over, total test time: %lu s",endTime - startTime);
     return ret;
 }
 void test_tree()

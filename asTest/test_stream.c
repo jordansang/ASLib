@@ -84,14 +84,14 @@ void test_stream()
     tsh.seq = 0x100;
     tsh.stamp = asl_time_get_stamp();
     tsh.flag = 0xee;
-    asl_print_dbg("TSH len:  %d vs %d", TSH_LEN, TSH_T_LEN);
+    asl_print_dbg("TSH len:  %d vs %ld", TSH_LEN, TSH_T_LEN);
     asl_print_hex(&tsh, TSH_T_LEN, "TSH");
     
     tsbh.type = 0x02;
     tsbh.check = 0xaa;
     tsbh.author = 0x66;
     tsbh.len = 0x0a;
-    asl_print_dbg("TSBH len: %d vs %d", TSBH_LEN, TSBH_T_LEN);
+    asl_print_dbg("TSBH len: %d vs %ld", TSBH_LEN, TSBH_T_LEN);
     asl_print_hex(&tsbh, TSBH_T_LEN, "TSBH");
 
     test_stream_head_encode(src, &tsh);

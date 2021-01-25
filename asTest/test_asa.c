@@ -61,7 +61,7 @@ static void test_asa_driver(s_int32_t method, s_int32_t *randInput, s_int32_t *r
     (ctac->sortFunc)(ret, TEST_ASA_ITEM_COUNT);
     end = asl_time_get_stamp();
     test_asa_ret_output("Sorted List", ret);
-    asl_printf("%s Sort %d item consume %llu seconds\n\n", ctac->desc, TEST_ASA_ITEM_COUNT, end - start);
+    asl_printf("%s Sort %d item consume %lu seconds\n\n", ctac->desc, TEST_ASA_ITEM_COUNT, end - start);
 
     asl_printf("%s Sort II:\n", ctac->desc);
     asl_memcpy(ret, randInputNodup, TEST_ASA_ITEM_COUNT * sizeof(s_int32_t));
@@ -70,7 +70,7 @@ static void test_asa_driver(s_int32_t method, s_int32_t *randInput, s_int32_t *r
     (ctac->sortFunc)(ret, TEST_ASA_ITEM_COUNT);
     end = asl_time_get_stamp();
     test_asa_ret_output("Sorted List", ret);
-    asl_printf("%s Sort %d no duplicated item consume %llu seconds\n\n", ctac->desc, TEST_ASA_ITEM_COUNT, end - start);
+    asl_printf("%s Sort %d no duplicated item consume %lu seconds\n\n", ctac->desc, TEST_ASA_ITEM_COUNT, end - start);
 }
 
 void test_asa()

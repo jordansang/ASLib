@@ -30,7 +30,7 @@ u_int64_t test_get_time_interval(struct timespec *before, struct timespec* after
 
     interval = nsecInterval;
 
-    //asl_print_dbg("secInter:%llu %llu inter:%llu", secInterval, secInterval*1000000000, interval);
+    //asl_print_dbg("secInter:%lu %lu inter:%lu", secInterval, secInterval*1000000000, interval);
     #else
     u_int64_t power = 1000000000;
     if(after->tv_sec != before->tv_sec)
@@ -38,7 +38,7 @@ u_int64_t test_get_time_interval(struct timespec *before, struct timespec* after
         asl_print_dbg("start:%lu:%lu end:%lu:%lu", 
                 before->tv_sec, before->tv_nsec, after->tv_sec, after->tv_nsec);
         interval = (after->tv_sec - before->tv_sec)*power + after->tv_nsec - before->tv_nsec;
-        asl_print_dbg("sec:%lu %lu nsec:%lu ret:%llu", 
+        asl_print_dbg("sec:%lu %lu nsec:%lu ret:%lu", 
                 (after->tv_sec - before->tv_sec),
                 (after->tv_sec - before->tv_sec)*1000000000, 
                 (after->tv_sec - before->tv_sec)*1000000000 + after->tv_nsec,
@@ -163,6 +163,6 @@ void test_memp()
     }
     clock_gettime(CLOCK_REALTIME, &afterTs);
     //asl_print_dbg("start:%lu:%lu end:%lu:%lu", beforeTs.tv_sec, beforeTs.tv_nsec, afterTs.tv_sec, afterTs.tv_nsec);
-    asl_printf("\n\n%d times average:%llu ns\n", TEST_COUNT, test_get_time_interval(&beforeTs, &afterTs)/TEST_COUNT);
+    asl_printf("\n\n%d times average:%lu ns\n", TEST_COUNT, test_get_time_interval(&beforeTs, &afterTs)/TEST_COUNT);
     return;
 }

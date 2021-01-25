@@ -88,7 +88,7 @@ u_int64_t func_time_consume(void (*func)(void*), void* arg)
     start = asl_time_get_stamp();
     func(arg);
     end = asl_time_get_stamp();
-    asl_print_dbg("start:%llu end:%llu consume:%llu", start, end, end - start);
+    asl_print_dbg("start:%lu end:%lu consume:%lu", start, end, end - start);
     return end- start;
 }
 
@@ -167,7 +167,7 @@ void thash()
         asd_list_get_val(bucket[h], &target[count]);
     }
     end = asl_time_get_stamp();
-    asl_print_dbg("Hash List: %llu", end - start);
+    asl_print_dbg("Hash List: %lu", end - start);
 
     count = THASH_ITEM_COUNT;
     start = asl_time_get_stamp();
@@ -176,7 +176,7 @@ void thash()
         asd_list_get_val(vlist, &target[count]);
     }
     end = asl_time_get_stamp();
-    asl_print_dbg("List: %llu", end - start);
+    asl_print_dbg("List: %lu", end - start);
 
     asl_free(src);
     asl_free(target);
@@ -210,7 +210,7 @@ int main(int argc, char** argv)
 {
     //gen_bracket_driver(10);
     //s_int32_t n = 10;
-    //asl_print_dbg("Consume:%llu", func_time_consume(gen_bracket_driver_s, &n));
+    //asl_print_dbg("Consume:%lu", func_time_consume(gen_bracket_driver_s, &n));
     //asl_print_dbg("Count:%d", tcount);
     //test_timer();
     //test_map();
@@ -221,6 +221,6 @@ int main(int argc, char** argv)
     //trlimit();
     //tcoredump();
     // test_log();
-    test_btree();
+    test_ctrl();
     return 0;
 }

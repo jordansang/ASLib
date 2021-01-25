@@ -24,7 +24,7 @@ static void test_tcp_server_do(void *arg)
         if(buf[0] == '0')
             break;
         stamp = asl_time_get_stamp();
-        sprintf(buf, "Current time %llu >", stamp);
+        sprintf(buf, "Current time %lu >", stamp);
         tlen = asl_send(sock, buf, strlen(buf) + 1);
         if(tlen <= 0)
             break;

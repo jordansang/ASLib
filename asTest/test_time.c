@@ -42,7 +42,7 @@ void test_time()
         asl_print_err("Get sub of a and b FAILED");
     }
     asl_print_dbg("ASL Time:%lu", asl_time(NULL));
-    asl_print_dbg("ASL Time stamp:%llu", asl_time_get_stamp());
+    asl_print_dbg("ASL Time stamp:%lu", asl_time_get_stamp());
     asl_print_dbg("a cmp b:%d", asl_time_cmp(&a, &b));
     asl_print_dbg("b cmp a:%d", asl_time_cmp(&b, &a));
     a.sec = 1;

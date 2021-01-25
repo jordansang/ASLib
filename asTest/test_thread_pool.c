@@ -6,7 +6,7 @@
 static void test_tp_thr1(void *arg)
 {
     u_int64_t *stamp = (u_int64_t*)arg;
-    asl_print_dbg("THR Stamp:%llu", *stamp);
+    asl_print_dbg("THR Stamp:%lu", *stamp);
 }
 
 static void test_tp1()
@@ -62,7 +62,7 @@ static void test_tp_thr2(void *arg)
     {
         asl_thread_cleanup_begin(test_tp_thr2_callback, NULL);
         sleep(1);
-        asl_print_dbg("THR Stamp:%llu", *stamp);
+        asl_print_dbg("THR Stamp:%lu", *stamp);
         asl_thread_cleanup_end(0);
     }
 }

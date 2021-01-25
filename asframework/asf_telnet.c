@@ -261,7 +261,7 @@ static void asl_telnet_timeout(void *arg)
         asl_sem_wait(&at->timeoutSem);
         cur = asl_time_get_stamp() - at->lastAccess;
         asl_sem_post(&at->timeoutSem);
-        //asl_print_dbg("%llu vs %u", cur, at->timeout);
+        //asl_print_dbg("%lu vs %u", cur, at->timeout);
         if(cur  >= at->timeout)
             break;
         sleep(1);
