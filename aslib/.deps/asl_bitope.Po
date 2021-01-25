@@ -1,3 +1,0 @@
-asl_bitope.o: asl_bitope.c /usr/include/stdc-predef.h
-
-/usr/include/stdc-predef.h:

@@ -70,6 +70,7 @@ s_int32_t asd_str_putf(struct asd_str *str, char* fmt, ...)
     va_list ap;
     va_start(ap, fmt);
     str->len = vsnprintf(&c, 1, fmt, ap);
+    va_end(ap);
     
     if(str->size < str->len + 1)
     {
@@ -87,8 +88,9 @@ s_int32_t asd_str_putf(struct asd_str *str, char* fmt, ...)
         }
         
     }
+    va_start(ap, fmt);
     vsnprintf(str->buf, str->len + 1, fmt, ap);
-    //asl_print_dbg("ret:%d", vsprintf(str->buf, fmt, ap));
+    // asl_print_dbg("ret:%d", vsprintf(str->buf, fmt, ap));
     
     va_end(ap);
     return str->len;
