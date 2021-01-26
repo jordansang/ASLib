@@ -35,7 +35,7 @@ s_int32_t asd_str_appendf(struct asd_str *str, char* fmt, ...)
     va_start(ap, fmt);
     s_int32_t oldLen = str->len;
     str->len += vsnprintf(&c, 1, fmt, ap);
-    
+    va_end(ap);
     if(str->size < str->len + 1)
     {
         str->buf = (char*)asl_realloc(str->buf, str->len + 1);
@@ -52,6 +52,7 @@ s_int32_t asd_str_appendf(struct asd_str *str, char* fmt, ...)
         }
         
     }
+    va_start(ap, fmt);
     vsnprintf(str->buf + oldLen, str->len - oldLen + 1, fmt, ap);
     //asl_print_dbg("ret:%d", vsprintf(str->buf, fmt, ap));
     
