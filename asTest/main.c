@@ -206,6 +206,19 @@ void trlimit()
     else
         asl_print_dbg("RLIMIT_CORE cur is %lu", rlim.rlim_max);
 }
+static void testShell()
+{
+    u_int32_t index;
+    struct asf_ctrl *acs = asf_ctrl_create(ASF_CTRL_INTF_SHELL, "Test CTRL Shell");
+    asf_ctrl_add_dir(acs, "UTs");
+    
+    for (index = 0; index < TC_COUNT; index++)
+    {
+        asf_ctrl_add_cmd(acs, "UTs", tc[index].name, tc[index].func);
+    }
+    
+    asf_ctrl_start(acs);
+}
 int main(int argc, char** argv)
 {
     //gen_bracket_driver(10);
@@ -221,6 +234,9 @@ int main(int argc, char** argv)
     //trlimit();
     //tcoredump();
     // test_log();
-    test_ctrl();
+    // test_ctrl();
+    testShell();
+    while(TRUE)
+        sleep(1000);
     return 0;
 }

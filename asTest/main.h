@@ -2,6 +2,7 @@
 #define ASTEST_MAIN_H
 
 #include "asl_inc.h"
+#include "asf_ctrl.h"
 
 void test_memg();
 void test_memp();
@@ -39,7 +40,9 @@ struct test_container tc[] =
 {
     {"memp", test_memp},
     {"memg", test_memg},
-    {"event", test_event}
+    {"event", test_event},
+    {"fifo", test_fifo},
+    {"list", test_list}
 };
 
 #define TC_COUNT ASL_COUNTOF(tc)
