@@ -36,15 +36,50 @@ struct test_container
     void (*func)();
 };
 
-struct test_container tc[] = 
+struct test_container ut4algo[] = 
 {
-    {"memp", test_memp},
-    {"memg", test_memg},
+    {"asa", test_asa}
+};
+#define UT4ALGO_COUNT ASL_COUNTOF(ut4algo)
+
+struct test_container ut4ds[] = 
+{
+    {"array", test_array},
+    {"btree", test_btree},
+    {"fifo", test_fifo},
+    {"list", test_list},
+    {"map", test_map},
+    {"stream", test_stream},
+    {"string", test_string},
+    {"tree", test_tree}
+};
+#define UT4DS_COUNT ASL_COUNTOF(ut4ds)
+
+struct test_container ut4fw[] = 
+{
+    {"ctrl", test_ctrl},
     {"event", test_event},
+    {"log", test_log},
+    {"memg", test_memg},
+    {"memp", test_memp},
+    {"netcore", test_net_core},
+    {"thrp", test_thread_pool},
+    {"timer", test_timer},
     {"fifo", test_fifo},
     {"list", test_list}
 };
+#define UT4FW_COUNT ASL_COUNTOF(ut4fw)
 
-#define TC_COUNT ASL_COUNTOF(tc)
+struct test_container ut4lib[] = 
+{
+    {"math", test_math},
+    {"thread", test_thread},
+    {"time", test_time},
+    {"tcp", test_tcp},
+    // {"telnet", test_telnet},
+    {"cli", test_cli},
+    // {"shell", test_shell}
+};
+#define UT4LIB_COUNT ASL_COUNTOF(ut4lib)
 
 #endif /* ASTEST_MAIN_H */

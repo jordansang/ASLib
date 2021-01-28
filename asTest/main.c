@@ -209,12 +209,30 @@ void trlimit()
 static void testShell()
 {
     u_int32_t index;
-    struct asf_ctrl *acs = asf_ctrl_create(ASF_CTRL_INTF_SHELL, "Test CTRL Shell");
-    asf_ctrl_add_dir(acs, "UTs");
-    
-    for (index = 0; index < TC_COUNT; index++)
+    struct asf_ctrl *acs = asf_ctrl_create(ASF_CTRL_INTF_SHELL, "UT Shell");
+    asf_ctrl_add_dir(acs, "algorithm");
+    asf_ctrl_add_dir(acs, "datastructure");
+    asf_ctrl_add_dir(acs, "framework");
+    asf_ctrl_add_dir(acs, "library");
+
+    for (index = 0; index < UT4ALGO_COUNT; index++)
     {
-        asf_ctrl_add_cmd(acs, "UTs", tc[index].name, tc[index].func);
+        asf_ctrl_add_cmd(acs, "algorithm", ut4algo[index].name, ut4algo[index].func);
+    }
+
+    for (index = 0; index < UT4DS_COUNT; index++)
+    {
+        asf_ctrl_add_cmd(acs, "datastructure", ut4ds[index].name, ut4ds[index].func);
+    }
+
+    for (index = 0; index < UT4FW_COUNT; index++)
+    {
+        asf_ctrl_add_cmd(acs, "framework", ut4fw[index].name, ut4fw[index].func);
+    }
+
+    for (index = 0; index < UT4LIB_COUNT; index++)
+    {
+        asf_ctrl_add_cmd(acs, "library", ut4lib[index].name, ut4lib[index].func);
     }
     
     asf_ctrl_start(acs);
